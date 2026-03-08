@@ -1,17 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap");
+
 * {
   margin: 0;
   padding: 0;
 }
 
 :root {
-  /* --primary-color:  */
+  --primary-btn-color: rgb(252, 227, 144);
   --border-radius: 0.5rem;
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: antiquewhite;
   overflow: hidden;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  color: rgb(42, 42, 42);
 }
 
 .notes-app-container {
@@ -20,29 +23,30 @@ body {
 }
 
 .notes-app-content {
-  background-color: white;
+  /* box-shadow: 0px 0px 24px rgb(211, 211, 211); */
   height: calc(100vh - 3rem);
   margin: 1rem 0;
   padding: 0.5rem 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border-radius: var(--border-radius);
 }
 
 .nav-mobile-tablet {
+  box-shadow: 0px 0px 8px rgb(211, 211, 211);
   display: flex;
   justify-content: space-evenly;
   gap: 1rem;
-  margin-bottom: 2rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: var(--border-radius);
 }
 
 .btn {
   border: none;
-  background-color: blueviolet;
+  background-color: var(--primary-btn-color);
   width: 50%;
   padding: 2rem 0;
-  color: white;
   font-size: 2rem;
   border-radius: var(--border-radius);
 }
@@ -52,16 +56,17 @@ body {
 }
 
 .main {
-  height: 50%;
+  height: 80%;
   border-bottom: 1px solid black;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .main-first-row {
-  margin-bottom: 0.5rem;
+  height: 20%;
 }
 
 .notes-title-input {
+  height: 100%;
   font-size: 1.5rem;
 }
 
@@ -71,13 +76,14 @@ body {
 
 .notes-description-input {
   font-size: 1.2rem;
+  height: 80%;
 }
 
 .notes-title-input,
 .notes-description-input {
   width: 100%;
   border: none;
-  background-color: transparent;
+  /* background-color: red; */
 }
 
 .notes-storage-mobile-tablet {
@@ -87,7 +93,7 @@ body {
 }
 
 .btn-notes {
-  background-color: aqua;
+  box-shadow: 0px 0px 8px rgb(211, 211, 211);
   width: 50%;
   border-radius: 0.8rem;
   display: flex;
