@@ -24,8 +24,8 @@ body {
 
 .notes-app-content {
   /* box-shadow: 0px 0px 24px rgb(211, 211, 211); */
-  height: calc(100vh - 3rem);
-  margin: 1rem 0;
+  height: calc(100vh - 2rem);
+  margin: 0.5rem 0;
   padding: 0.5rem 0.5rem;
   display: flex;
   flex-direction: column;
@@ -33,6 +33,7 @@ body {
 }
 
 .nav-mobile-tablet {
+  height: 10%;
   box-shadow: 0px 0px 8px rgb(211, 211, 211);
   display: flex;
   justify-content: space-evenly;
@@ -46,9 +47,15 @@ body {
   border: none;
   background-color: var(--primary-btn-color);
   width: 50%;
-  padding: 2rem 0;
   font-size: 2rem;
   border-radius: var(--border-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-image {
+  height: 2rem;
 }
 
 .nav-left-sidebar {
@@ -56,9 +63,8 @@ body {
 }
 
 .main {
-  height: 80%;
+  height: 50%;
   border-bottom: 1px solid black;
-  margin-bottom: 1rem;
 }
 
 .main-first-row {
@@ -71,7 +77,7 @@ body {
   font-size: 1.5rem;
 }
 
-.main .btn {
+.main-first-row .btn {
   display: none;
 }
 
@@ -84,18 +90,25 @@ body {
 .notes-description-input {
   width: 100%;
   border: none;
+  background-color: rgb(211, 211, 211);
+  border-radius: var(--border-radius);
   /* background-color: red; */
 }
 
 .notes-storage-mobile-tablet {
+  height: 35%;
   display: flex;
-  gap: 0.5rem;
-  /* overflow-x: auto; */
+  align-items: center;
+  gap: 0.3rem;
+  padding-right: 0.5rem;
+  overflow-x: auto;
+  /* padding: 1rem 0.5rem; */
 }
 
 .btn-notes {
-  box-shadow: 0px 0px 8px rgb(211, 211, 211);
-  width: 50%;
+  min-width: 50%;
+  height: 70%;
+  border: 1px solid rgb(211, 211, 211);
   border-radius: 0.8rem;
   display: flex;
   flex-direction: column;
@@ -107,9 +120,9 @@ body {
   font-size: 1rem;
 }
 
-.notes-description {
-  height: 6rem;
-}
+/* .notes-description {
+  height: 7rem;
+} */
 
 .notes-time-date {
   text-align: right;
@@ -132,6 +145,11 @@ body {
 
   .btn {
     width: 15rem;
+    height: 8rem;
+  }
+
+  .btn-image {
+    height: 3.5rem;
   }
 
   .notes-storage-mobile-tablet {
@@ -150,7 +168,7 @@ body {
 
   .notes-app-content {
     flex-direction: row;
-    gap: 1rem;
+    gap: 2rem;
   }
 
   .nav-mobile-tablet {
@@ -161,19 +179,19 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 20%;
+    width: 15%;
     height: 100%;
   }
 
-  .new-note {
-    height: 15%;
+  .new-note,
+  .main-first-row {
+    height: 4rem;
   }
 
   .new-note .btn {
     width: 100%;
     height: 100%;
     font-size: 1rem;
-    padding: 1rem 0;
   }
 
   .saved-notes {
@@ -213,7 +231,12 @@ body {
   }
 
   .main-first-row .btn {
-    display: block;
+    display: flex;
+    height: 100%;
+  }
+
+  .btn-image {
+    height: 2.5rem;
   }
 
   .notes-description-input {
