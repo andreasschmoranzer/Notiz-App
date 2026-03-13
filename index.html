@@ -4,114 +4,66 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notiz App</title>
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="main.js"></script>
   </head>
   <body>
     <div class="notes-app-container">
       <div class="notes-app-content">
-        <div class="nav-mobile-tablet">
-          <button class="btn">
+        <div onclick="saveNote()" class="nav-mobile-tablet">
+          <button class="new-note">
             <img
               src="img/newNote.svg"
               alt="Neue Notiz erstellen"
-              class="btn-image"
+              class="btn-icon"
             /></button
-          ><button class="btn">
+          ><button class="save-note">
             <img
               src="img/archive.svg"
               alt="Notiz zum Archiv hinzufügen"
-              class="btn-image"
+              class="btn-icon"
             /></button
-          ><button class="btn">
-            <img src="img/trash.svg" alt="Notiz löschen" class="btn-image" />
+          ><button class="delete-note">
+            <img src="img/trash.svg" alt="Notiz löschen" class="btn-icon" />
           </button>
         </div>
         <div class="nav-left-sidebar">
-          <div class="new-note">
-            <button class="btn">
+          <div onclick="saveNote()" class="create-note">
+            <button class="new-note">
               <img
                 src="img/newNote.svg"
                 alt="Neue Notiz erstellen"
-                class="btn-image"
+                class="btn-icon"
               />
             </button>
           </div>
-          <div class="saved-notes">
-            <div class="btn-notes">
-              <h2 class="notes-title">Amazon Abo kündigen</h2>
-              <p class="notes-description">
-                Mein amazon Prime Abo unbedingt zum nächstmöglichen Zeitpunkt
-                kündigen
-              </p>
-              <p class="notes-time-date">06.03.26, 11:43</p>
-            </div>
-            <div class="btn-notes">
-              <h2 class="notes-title">Netflix Abo kündigen</h2>
-              <p class="notes-description">
-                Mein Netflix Abo unbedingt zum nächstmöglichen Zeitpunkt
-                kündigen
-              </p>
-              <p class="notes-time-date">06.03.26, 11:43</p>
-            </div>
-          </div>
+          <div id="storage-desktop" class="notes-storage-desktop"></div>
         </div>
-        <div class="main">
-          <div class="main-first-row">
+        <div class="main-content">
+          <div class="main-title-and-save">
             <input
               type="text"
-              class="notes-title-input"
+              id="notes-title-input"
               placeholder="Überschrift eingeben..."
             />
-
-            <button class="btn">
+            <button class="save-note">
               <img
                 src="img/archive.svg"
                 alt="Notiz zum Archiv hinzufügen"
-                class="btn-image"
+                class="btn-icon"
               />
             </button>
-            <button class="btn">
-              <img src="img/trash.svg" alt="Notiz löschen" class="btn-image" />
+            <button class="delete-note">
+              <img src="img/trash.svg" alt="Notiz löschen" class="btn-icon" />
             </button>
           </div>
           <textarea
             name="Notes Description"
-            id="notes-description"
-            class="notes-description-input"
+            id="notes-description-input"
             placeholder="Erstelle eine Notiz"
           ></textarea>
         </div>
-        <div class="notes-storage-mobile-tablet">
-          <div class="btn-notes">
-            <h2 class="notes-title">Amazon Abo kündigen</h2>
-            <p class="notes-description">
-              Mein amazon Prime Abo unbedingt zum nächstmöglichen Zeitpunkt
-              kündigen
-            </p>
-            <p class="notes-time-date">06.03.26, 11:43</p>
-          </div>
-          <!-- <div class="btn-notes">
-            <h2 class="notes-title">Netflix Abo kündigen</h2>
-            <p class="notes-description">
-              Mein Netflix Abo unbedingt zum nächstmöglichen Zeitpunkt kündigen
-            </p>
-            <p class="notes-time-date">06.03.26, 11:43</p>
-          </div> -->
-          <div class="btn-notes">
-            <h2 class="notes-title">Netflix Abo kündigen</h2>
-            <p class="notes-description">
-              Mein Netflix Abo unbedingt zum nächstmöglichen Zeitpunkt kündigen
-            </p>
-            <p class="notes-time-date">06.03.26, 11:43</p>
-          </div>
-          <div class="btn-notes">
-            <h2 class="notes-title">Sky Abo kündigen</h2>
-            <p class="notes-description">
-              Mein Sky Abo unbedingt zum nächstmöglichen Zeitpunkt kündigen
-            </p>
-            <p class="notes-time-date">06.03.26, 11:43</p>
-          </div>
-        </div>
+        <div id="storage-mobile" class="notes-storage-mobile-tablet"></div>
       </div>
     </div>
   </body>

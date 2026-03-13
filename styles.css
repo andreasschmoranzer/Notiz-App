@@ -1,0 +1,284 @@
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --font-family: "M PLUS Rounded 1c", sans-serif;
+  --primary-color: 252, 227, 144;
+  --primary-color-rgb: rgb(var(--primary-color));
+  --primary-color--hover: rgb(254, 239, 188);
+  --border-radius: 0.5rem;
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow: hidden;
+  background-color: rgb(255, 251, 239);
+  color: rgb(42, 42, 42);
+}
+
+.notes-app-container {
+  font-family: var(--font-family);
+  width: 95%;
+  margin: 0 auto;
+}
+
+.notes-app-content {
+  height: calc(100vh - 2rem);
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-mobile-tablet {
+  height: 10%;
+  /* box-shadow: 0px 0px 5px rgb(211, 211, 211); */
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: var(--border-radius);
+}
+
+.new-note,
+.save-note,
+.delete-note {
+  border: none;
+  background-color: var(--primary-color-rgb);
+  width: 50%;
+  font-size: 2rem;
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.new-note:hover,
+.save-note:hover,
+.delete-note:hover {
+  cursor: pointer;
+  background-color: var(--primary-color--hover);
+}
+
+.btn-icon {
+  height: 2rem;
+}
+
+.nav-left-sidebar {
+  display: none;
+}
+
+.main-content {
+  height: 60%;
+}
+
+.main-title-and-save {
+  width: 100%;
+  height: 15%;
+  margin-bottom: 1rem;
+}
+
+#notes-title-input {
+  height: 100%;
+  padding: 0 0.5rem;
+  width: calc(100% - 1rem);
+  font-size: 1.5rem;
+}
+
+.main-title-and-save .save-note,
+.main-title-and-save .delete-note {
+  display: none;
+}
+
+#notes-description-input {
+  width: calc(100% - 1rem);
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  height: 75%;
+}
+
+#notes-title-input,
+#notes-description-input {
+  font-family: var(--font-family);
+  color: rgb(42, 42, 42);
+  box-shadow: 0px 0px 5px rgb(211, 211, 211);
+  border: none;
+  border-radius: var(--border-radius);
+  outline: none;
+  resize: none;
+}
+
+#notes-title-input::placeholder,
+#notes-description-input::placeholder {
+  color: rgb(167, 167, 167);
+}
+
+.notes-storage-mobile-tablet {
+  display: flex;
+  gap: 1rem;
+  overflow-y: hidden;
+  overflow-x: auto;
+  padding: 1rem 0.5rem;
+}
+
+.note-card {
+  min-width: 50%;
+  border: 0.5px solid rgb(211, 211, 211);
+  box-shadow: 0px 0px 5px rgb(211, 211, 211);
+  border-radius: var(--border-radius);
+  transition: 0.2s all ease-in-out;
+  padding: 2rem;
+}
+
+.note-card:not(.selected-note) {
+  cursor: pointer;
+}
+
+.note-card:hover,
+.selected-note {
+  background-color: rgba(var(--primary-color), 0.1);
+}
+
+.note-title {
+  font-size: 1.2rem;
+}
+
+.note-content {
+  font-size: 0.8rem;
+}
+
+.note-date {
+  font-size: 0.6rem;
+  text-align: right;
+  font-style: italic;
+}
+
+.note-title,
+.note-content,
+.note-date {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media only screen and (min-width: 600px) {
+  .notes-app-container {
+    width: 85%;
+  }
+
+  .nav-mobile-tablet {
+    justify-content: space-between;
+  }
+
+  .new-note,
+  .save-note,
+  .delete-note {
+    width: 15rem;
+  }
+
+  .notes-storage-mobile-tablet {
+    justify-content: space-between;
+  }
+
+  .note-card {
+    width: 25rem;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .notes-app-container {
+    width: 95%;
+  }
+
+  .notes-app-content {
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .nav-mobile-tablet {
+    display: none;
+  }
+
+  .nav-left-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 15%;
+    height: 100%;
+  }
+
+  .create-note,
+  .main-title-and-save {
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .new-note {
+    width: 95%;
+    height: 100%;
+  }
+
+  .notes-storage-desktop {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    overflow-y: auto;
+  }
+
+  .note-card {
+    width: 95%;
+    padding: 0;
+  }
+
+  .note-title,
+  .note-content,
+  .note-date {
+    margin: 0.5rem;
+  }
+
+  .main-content {
+    width: 80%;
+    height: 100%;
+    margin-bottom: 0;
+    border-bottom: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .main-title-and-save {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 0;
+  }
+
+  .main-title-and-save .save-note,
+  .main-title-and-save .delete-note {
+    display: flex;
+    height: 100%;
+  }
+
+  #notes-description-input {
+    height: 100%;
+  }
+
+  .notes-storage-mobile-tablet {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .notes-app-container {
+    max-width: 1400px;
+  }
+}
