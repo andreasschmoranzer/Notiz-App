@@ -5,19 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notiz App</title>
     <link rel="stylesheet" href="styles.css" />
-    <script src="main.js"></script>
   </head>
   <body>
     <div class="notes-app-container">
       <div class="notes-app-content">
-        <div onclick="saveNote()" class="nav-mobile-tablet">
+        <div class="nav-mobile-tablet">
           <button class="new-note">
             <img
               src="img/newNote.svg"
               alt="Neue Notiz erstellen"
               class="btn-icon"
             /></button
-          ><button class="save-note">
+          ><button onclick="saveNote()" class="save-note">
             <img
               src="img/archive.svg"
               alt="Notiz zum Archiv hinzufügen"
@@ -28,7 +27,7 @@
           </button>
         </div>
         <div class="nav-left-sidebar">
-          <div onclick="saveNote()" class="create-note">
+          <div class="create-note">
             <button class="new-note">
               <img
                 src="img/newNote.svg"
@@ -37,13 +36,13 @@
               />
             </button>
           </div>
-          <div id="storage-desktop" class="notes-storage-desktop"></div>
+          <div class="storage-desktop"></div>
         </div>
         <div class="main-content">
           <div class="main-title-and-save">
             <input
               type="text"
-              id="notes-title-input"
+              id="note-title-input"
               placeholder="Überschrift eingeben..."
             />
             <button class="save-note">
@@ -58,13 +57,14 @@
             </button>
           </div>
           <textarea
-            name="Notes Description"
-            id="notes-description-input"
+            id="note-content-input"
             placeholder="Erstelle eine Notiz"
           ></textarea>
         </div>
-        <div id="storage-mobile" class="notes-storage-mobile-tablet"></div>
+        <div class="storage-mobile"></div>
       </div>
     </div>
+    <script src="notesAPI.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>

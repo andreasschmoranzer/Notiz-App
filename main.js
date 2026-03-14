@@ -1,91 +1,79 @@
-let notes = [
-  {
-    id: 1,
-    title: "Amazon Abo kündigen",
-    content:
-      "Jetzt das Amazon abo zeitnah kündigen. Kündigungsfrist 4 Wochen zum Monatsende.",
-    lastUpdated: 1773206052501,
-  },
-  {
-    id: 2,
-    title: "Netflix Abo kündigen",
-    content:
-      "Jetzt das Netflix abo zeitnah kündigen. Kündigungsfrist 4 Wochen zum Monatsende.",
-    lastUpdated: 1763406052503,
-  },
-  {
-    id: 3,
-    title: "Entkalker kaufen beim Rewe",
-    content:
-      "Zitronensäure kaufen und den Schwimmer in der Klospülung entkalken.",
-    lastUpdated: 1723406052504,
-  },
-];
+const storageMobileEle = document.querySelector(".storage-mobile");
+const storageDesktopEle = document.querySelector(".storage-desktop");
 
-console.log(notes);
-console.log(notes.find((item) => item.title.includes("Entkalker")));
+document.addEventListener("DOMContentLoaded", readLocalstorage);
 
-document.addEventListener("DOMContentLoaded", saveNote);
+function readLocalstorage() {
+  const notesFromLocalstorage = JSON.parse(localStorage.getItem("Notes"));
+  console.log(notesFromLocalstorage);
 
-function displaySelectedNote(id) {
-  console.log(id);
-  const noteObject = notes.find((item) => item.id === id);
-  console.log(noteObject);
-  document.querySelector("#notes-title-input").value = noteObject.title;
-  document.querySelector("#notes-description-input").value = noteObject.content;
+  if (notesFromLocalstorage === null) {
+    notes = [];
+    noteId = 0;
+  } else {
+    notes = notesFromLocalstorage;
+    noteId = notes.length;
+    displayStorageNotes();
+  }
 }
 
-function createNoteCard(note, divId) {
-  const noteCardDiv = document.createElement("div");
-  const noteTitle = document.createElement("h2");
-  const noteContent = document.createElement("p");
-  const noteDate = document.createElement("p");
+function displayStorageNotes() {
+  // const notes = MOCK_NOTES;
 
-  const date = new Date(note.lastUpdated);
-  const day = date.getDate();
-  const month = date.getMonth();
-  const year = date.getFullYear();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
+  const sortedNotes = notes.sort(
+    (noteA, noteB) => noteB.lastUpdated - noteA.lastUpdated,
+  );
 
-  noteTitle.appendChild(document.createTextNode(note.title));
-  noteContent.appendChild(document.createTextNode(note.content));
-  noteDate.innerHTML =
-    day +
-    "." +
-    month +
-    "." +
-    year +
-    ", " +
-    hours +
-    ":" +
-    minutes +
-    ":" +
-    seconds;
+  let html = "";
 
-  noteCardDiv.classList.add("note-card");
-  noteCardDiv.id = note.id;
-  noteTitle.classList.add("note-title");
-  noteContent.classList.add("note-content");
-  noteDate.classList.add("note-date");
+  sortedNotes.forEach((note) => {
+    html += `
+    <div class="note-card" data-id="${note.id}">
+      <h2 class="note-title">${note.title}</h2>
+      <p class="note-content">${note.content}</p>
+      <p class="note-date">${new Date(note.lastUpdated).toLocaleString("de-DE")}</p>
+    </div>
+    `;
+  });
 
-  noteCardDiv.appendChild(noteTitle);
-  noteCardDiv.appendChild(noteContent);
-  noteCardDiv.appendChild(noteDate);
-
-  noteCardDiv.setAttribute("onclick", `displaySelectedNote(${note.id})`);
-
-  divId.appendChild(noteCardDiv);
+  storageMobileEle.innerHTML = html;
+  storageDesktopEle.innerHTML = html;
 }
+
+// displayStorageNotes();
 
 function saveNote() {
-  notes.sort((itemA, itemB) => itemB.lastUpdated - itemA.lastUpdated);
+  noteId++;
+  console.log(noteId);
+
+  const noteTitleEle = document.getElementById("note-title-input").value;
+  const noteContentEle = document.getElementById("note-content-input").value;
+
+  const note = {
+    id: noteId,
+    title: noteTitleEle,
+    content: noteContentEle,
+    lastUpdated: new Date().getTime(),
+  };
+
+  console.log(note);
+
+  notes.push(note);
   console.log(notes);
-  notes.forEach((note) => {
-    const storageMobile = document.querySelector("#storage-mobile");
-    createNoteCard(note, storageMobile);
-    const storageDesktop = document.querySelector("#storage-desktop");
-    createNoteCard(note, storageDesktop);
-  });
+
+  // notes dynamisch anzeigen
+
+  displayStorageNotes();
+
+  // notes zum LocalStorage hinzufügen
+
+  const saveNotesToLocalStorage = localStorage.setItem(
+    "Notes",
+    JSON.stringify(notes),
+  );
+
+  // Input Felder clearen
+
+  document.getElementById("note-title-input").value = "";
+  document.getElementById("note-content-input").value = "";
 }
