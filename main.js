@@ -1,24 +1,20 @@
 const storageMobileEle = document.querySelector(".storage-mobile");
 const storageDesktopEle = document.querySelector(".storage-desktop");
+const saveButtonEle = document.querySelector(".save-note");
+const noteTitleEle = document.getElementById("note-title-input");
+const noteContentEle = document.getElementById("note-content-input");
+const noteCardButtonEle = document.querySelector(".note-card");
+const deleteButtonEle = document.querySelector(".delete-note");
 
-document.addEventListener("DOMContentLoaded", readLocalstorage);
+// Frage an Frederik funktioniert das auch, wenn die Klasse auf mehrere HTML Elemente angewendet ist?
+// saveButtonEle.addEventListener("click", saveNote);
+// deleteButtonEle.addEventListener("click", () => alert("Hallo"));
 
-function readLocalstorage() {
-  const notesFromLocalstorage = JSON.parse(localStorage.getItem("Notes"));
-  console.log(notesFromLocalstorage);
-
-  if (notesFromLocalstorage === null) {
-    notes = [];
-    noteId = 0;
-  } else {
-    notes = notesFromLocalstorage;
-    noteId = notes.length;
-    displayStorageNotes();
-  }
-}
+// document.addEventListener("DOMContentLoaded", readLocalstorage);
+displayStorageNotes();
 
 function displayStorageNotes() {
-  // const notes = MOCK_NOTES;
+  const notes = getNotes();
 
   const sortedNotes = notes.sort(
     (noteA, noteB) => noteB.lastUpdated - noteA.lastUpdated,
@@ -40,40 +36,24 @@ function displayStorageNotes() {
   storageDesktopEle.innerHTML = html;
 }
 
-// displayStorageNotes();
+function saveButton() {
+  const title = noteTitleEle.value;
+  const content = noteContentEle.value;
 
-function saveNote() {
-  noteId++;
-  console.log(noteId);
+  if (title === "" && content === "") {
+    alert("Bitte Titel und Inhalt eingeben.");
+    return;
+  } else if (title === "" && content !== "") {
+    alert("Bitte noch den Titel hinzufügen.");
+    return;
+  } else if (title !== "" && content === "") {
+    alert("Bitte noch den Inhalt eingeben.");
+    return;
+  }
 
-  const noteTitleEle = document.getElementById("note-title-input").value;
-  const noteContentEle = document.getElementById("note-content-input").value;
-
-  const note = {
-    id: noteId,
-    title: noteTitleEle,
-    content: noteContentEle,
-    lastUpdated: new Date().getTime(),
-  };
-
-  console.log(note);
-
-  notes.push(note);
-  console.log(notes);
-
-  // notes dynamisch anzeigen
-
+  saveNote(title, content);
   displayStorageNotes();
 
-  // notes zum LocalStorage hinzufügen
-
-  const saveNotesToLocalStorage = localStorage.setItem(
-    "Notes",
-    JSON.stringify(notes),
-  );
-
-  // Input Felder clearen
-
-  document.getElementById("note-title-input").value = "";
-  document.getElementById("note-content-input").value = "";
+  noteTitleEle.value = "";
+  noteContentEle.value = "";
 }

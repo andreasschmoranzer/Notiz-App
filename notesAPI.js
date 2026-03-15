@@ -1,26 +1,38 @@
-let notes = [];
+/* let notes = []; */
 let noteId = 0;
 
-const MOCK_NOTES = [
-  {
-    id: 1,
-    title: "Amazon Abo kündigen",
-    content:
-      "Jetzt das Amazon abo zeitnah kündigen. Kündigungsfrist 4 Wochen zum Monatsende.",
-    lastUpdated: 1763505595788,
-  },
-  {
-    id: 2,
-    title: "Netflix Abo kündigen",
-    content:
-      "Jetzt das Netflix abo zeitnah kündigen. Kündigungsfrist 4 Wochen zum Monatsende.",
-    lastUpdated: 1713505595788,
-  },
-  {
-    id: 3,
-    title: "Entkalker kaufen beim Rewe",
-    content:
-      "Zitronensäure kaufen und den Schwimmer in der Klospülung entkalken.",
-    lastUpdated: 1743505595788,
-  },
-];
+const LOCAL_STORAGE_KEY = "noteapp-notes";
+
+function getNotes() {
+  return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+}
+
+function saveNote(title, content) {
+  const notes = getNotes();
+
+  if (notes === []) {
+    noteId = 0;
+  } else {
+    noteId = notes.length;
+  }
+
+  noteId++;
+
+  notes.push({
+    id: noteId,
+    title,
+    content,
+    lastUpdated: new Date().getTime(),
+  });
+
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(notes));
+}
+
+function getNextId() {
+  const notes = getNotes();
+
+  const sortedNotes = notes.sort((noteA, noteB) => noteA.id - noteB.id);
+  console.log(sortedNotes);
+}
+
+getNextId();

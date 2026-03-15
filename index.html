@@ -16,7 +16,7 @@
               alt="Neue Notiz erstellen"
               class="btn-icon"
             /></button
-          ><button onclick="saveNote()" class="save-note">
+          ><button onclick="saveButton()" class="save-note">
             <img
               src="img/archive.svg"
               alt="Notiz zum Archiv hinzufügen"
@@ -45,7 +45,7 @@
               id="note-title-input"
               placeholder="Überschrift eingeben..."
             />
-            <button class="save-note">
+            <button onclick="saveButton()" class="save-note">
               <img
                 src="img/archive.svg"
                 alt="Notiz zum Archiv hinzufügen"
