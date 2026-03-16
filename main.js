@@ -9,8 +9,8 @@ const deleteButtonEle = document.querySelector(".delete-note");
 // Frage an Frederik funktioniert das auch, wenn die Klasse auf mehrere HTML Elemente angewendet ist?
 // saveButtonEle.addEventListener("click", saveNote);
 // deleteButtonEle.addEventListener("click", () => alert("Hallo"));
-
 // document.addEventListener("DOMContentLoaded", readLocalstorage);
+
 displayStorageNotes();
 
 function displayStorageNotes() {
@@ -24,7 +24,7 @@ function displayStorageNotes() {
 
   sortedNotes.forEach((note) => {
     html += `
-    <div class="note-card" data-id="${note.id}">
+    <div onclick="readAndDisplayNote(this)" class="note-card" data-id="${note.id}" data-title="${note.title}" data-content="${note.content}">
       <h2 class="note-title">${note.title}</h2>
       <p class="note-content">${note.content}</p>
       <p class="note-date">${new Date(note.lastUpdated).toLocaleString("de-DE")}</p>

@@ -1,6 +1,3 @@
-/* let notes = []; */
-let noteId = 0;
-
 const LOCAL_STORAGE_KEY = "noteapp-notes";
 
 function getNotes() {
@@ -10,20 +7,14 @@ function getNotes() {
 function saveNote(title, content) {
   const notes = getNotes();
 
-  if (notes === []) {
-    noteId = 0;
-  } else {
-    noteId = notes.length;
-  }
-
-  noteId++;
-
   notes.push({
-    id: noteId,
+    id: getNextId(),
     title,
     content,
     lastUpdated: new Date().getTime(),
   });
+
+  notes.sort((noteA, noteB) => noteA.id - noteB.id);
 
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(notes));
 }
@@ -31,8 +22,39 @@ function saveNote(title, content) {
 function getNextId() {
   const notes = getNotes();
 
-  const sortedNotes = notes.sort((noteA, noteB) => noteA.id - noteB.id);
-  console.log(sortedNotes);
+  let noteId = 1;
+
+  for (let i = 0; i < notes.length + 1; i++) {
+    let findCurrentNoteId = notes.find((item) => item.id === noteId);
+    if (findCurrentNoteId === undefined) {
+      break;
+    } else {
+      noteId++;
+    }
+  }
+  return noteId;
 }
 
-getNextId();
+/* lösungsvorschlag: function getNextId() {
+  const notes = getNotes();
+
+  const sortedNotes = notes.sort((noteA, noteB) => noteA.id - noteB.id);
+  
+  let nextId = 1;
+
+  for (let note of sortedNotes) {
+  if(nextId < note.id) break;
+  nextId = note.id + 1;
+  }
+
+  return nextId;
+} */
+
+function readAndDisplayNote(note) {
+  const selectedNoteId = note.getAttribute("data-id");
+  const selectedNoteTitle = note.getAttribute("data-title");
+  const selectedNoteContent = note.getAttribute("data-content");
+
+  noteTitleEle.value = selectedNoteTitle;
+  noteContentEle.value = selectedNoteContent;
+}
