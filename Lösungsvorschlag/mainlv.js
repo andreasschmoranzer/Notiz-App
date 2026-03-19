@@ -5,29 +5,27 @@ const saveButtonMobileEle = document.querySelector("#save-note-mobile");
 const saveButtonDesktopEle = document.querySelector("#save-note-desktop");
 const createNoteButtonMobileEle = document.querySelector(".new-note");
 const createNoteButtonDesktopEle = document.querySelector(".create-note");
-const deleteButtonMobileEle = document.querySelector("#delete-note-mobile");
-const deleteButtonDesktopEle = document.querySelector("#delete-note-desktop");
 
 const noteTitleEle = document.getElementById("note-title-input");
 const noteContentEle = document.getElementById("note-content-input");
 const noteCardButtonEle = document.querySelector(".note-card");
+const deleteButtonEle = document.querySelector(".delete-note");
 
 let replaceNote = false;
 let noteId = null;
 
-createNoteButtonMobileEle.addEventListener("click", () => newNoteButton());
-createNoteButtonDesktopEle.addEventListener("click", () => newNoteButton());
-
+// Frage an Frederik funktioniert das auch, wenn die Klasse auf mehrere HTML Elemente angewendet ist?
 saveButtonMobileEle.addEventListener("click", () => saveButton());
 saveButtonDesktopEle.addEventListener("click", () => saveButton());
-
-deleteButtonMobileEle.addEventListener("click", () =>
-  deleteNoteButton(deleteButtonMobileEle.getAttribute("data-id")),
-);
-deleteButtonDesktopEle.addEventListener("click", () => deleteNoteButton(id));
+// deleteButtonEle.addEventListener("click", () => alert("Hallo"));
+// document.addEventListener("DOMContentLoaded", readLocalstorage);
 
 displayStorageNotes();
+// applyListeners();
 applyEventListener();
+
+createNoteButtonMobileEle.addEventListener("click", () => newNoteButton());
+createNoteButtonDesktopEle.addEventListener("click", () => newNoteButton());
 
 function applyEventListener() {
   const noteEntriesEls = document.querySelectorAll(".note-card");
@@ -38,6 +36,15 @@ function applyEventListener() {
     );
   });
 }
+
+// Lösungsvorschlag:
+/* function applyListeners() {
+  const noteEntriesEls = document.querySelectorAll(".note-entry");
+
+  noteEntriesEls.forEach((noteEntry) => {
+    noteEntry.addEventListener("click", () => selectNote(noteEntry.getAttribute("data-id")));
+  });
+} */
 
 function displayStorageNotes() {
   const notes = getNotes();
@@ -98,6 +105,7 @@ function saveButton() {
 
   saveNote(title, content, replaceNote);
   displayStorageNotes();
+  // applyListeners();
 
   noteTitleEle.value = "";
   noteContentEle.value = "";
@@ -113,23 +121,66 @@ function newNoteButton() {
   deleteSelectedNoteClass();
 }
 
-function deleteNoteButton(id) {
-  // replaceNote = false;
-
-  const selectedNoteEl = document.querySelector(`.note-card[data-id="${id}"]`);
-  console.log(selectedNoteEl);
-
-  noteTitleEle.value = "";
-  noteContentEle.value = "";
-
-  /* noteTitleEle.value = "";
-  noteContentEle.value = "";
-  deleteSelectedNoteClass(); */
-}
-
 function deleteSelectedNoteClass() {
   const noteCardEls = document.querySelectorAll(".note-card");
   noteCardEls.forEach((noteCard) => {
     noteCard.classList.remove("selected-note");
   });
 }
+
+// Lösungsvorschlag
+/* function saveButton() {
+  const title = noteTitleEle.value;
+  const content = noteContentEle.value;
+
+  console.log(replaceNote);
+
+  if (title === "" && content === "") {
+    alert("Bitte Titel und Inhalt eingeben.");
+    return;
+  } else if (title === "" && content !== "") {
+    alert("Bitte noch den Titel hinzufügen.");
+    return;
+  } else if (title !== "" && content === "") {
+    alert("Bitte noch den Inhalt eingeben.");
+    return;
+  }
+
+  let currentId = undefined;
+
+  const currentlySelectedNoteEl = document.querySelector(".selected-note");
+  if (currentlySelectedNoteEl) {
+    currentId = currentlySelectedNoteEl.getAttribute("data-id");
+  }
+
+  saveNote(title, content, Number(currentId));
+
+  noteTitleEle.value = "";
+  noteContentEle.value = "";
+  // applyListeners();
+
+  replaceNote = false;
+} */
+
+// Lösungsvorschlag
+/* function selectNote(id) {
+  const selectedNoteEl = document.querySelector(`.note-entry[data-id="${id}"]`);
+
+  if (selectedNoteEl.classList.contains("selected-note")) return;
+
+  const noteEntriesEls = document.querySelectorAll(".note-entry");
+  noteEntriesEls.forEach((noteEntry) => {
+    noteEntry.classList.remove("selected-note");
+  });
+
+  selectedNoteEl.classList.add("selected-note");
+
+  const notes = getNotes();
+
+  const selectedNote = notes.find((note) => note.id === Number(id));
+
+  if (!selectedNote) return;
+
+  titleInputEl.value = selectedNote.title;
+  contenInputEl.value = selectedNote.content;
+} */

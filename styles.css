@@ -141,7 +141,8 @@ body {
 
 .note-card:hover,
 .selected-note {
-  background-color: rgba(var(--primary-color), 0.1);
+  background-color: red;
+  /* background-color: rgba(var(--primary-color), 0.1); */
 }
 
 .note-title {
