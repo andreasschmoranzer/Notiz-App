@@ -44,3 +44,15 @@ function getNextId() {
   }
   return noteId;
 }
+
+function deleteNote(deleteNoteId) {
+  const notes = getNotes();
+
+  const filteredNotes = notes.filter((note) => note.id !== deleteNoteId);
+
+  /* const deleteNoteIndex = notes.findIndex((note) => note.id === deleteNoteId);
+
+  notes.splice(deleteNoteIndex, 1); */
+
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(filteredNotes));
+}

@@ -15,16 +15,14 @@ const noteCardButtonEle = document.querySelector(".note-card");
 let replaceNote = false;
 let noteId = null;
 
-createNoteButtonMobileEle.addEventListener("click", () => newNoteButton());
-createNoteButtonDesktopEle.addEventListener("click", () => newNoteButton());
-
 saveButtonMobileEle.addEventListener("click", () => saveButton());
 saveButtonDesktopEle.addEventListener("click", () => saveButton());
 
-deleteButtonMobileEle.addEventListener("click", () =>
-  deleteNoteButton(deleteButtonMobileEle.getAttribute("data-id")),
-);
-deleteButtonDesktopEle.addEventListener("click", () => deleteNoteButton(id));
+createNoteButtonMobileEle.addEventListener("click", () => newNoteButton());
+createNoteButtonDesktopEle.addEventListener("click", () => newNoteButton());
+
+deleteButtonMobileEle.addEventListener("click", () => deleteNoteButton());
+deleteButtonDesktopEle.addEventListener("click", () => deleteNoteButton());
 
 displayStorageNotes();
 applyEventListener();
@@ -51,8 +49,8 @@ function displayStorageNotes() {
   sortedNotes.forEach((note) => {
     html += `
     <div class="note-card" data-id="${note.id}" data-title="${note.title}" data-content="${note.content}">
-      <h2 class="note-title">${note.title}</h2>
-      <p class="note-content">${note.content}</p>
+      <h2 class="note-title">${escapeHtml(note.title)}</h2>
+      <p class="note-content">${escapeHtml(note.content)}</p>
       <p class="note-date">${new Date(note.lastUpdated).toLocaleString("de-DE")}</p>
     </div>
     `;
@@ -63,6 +61,7 @@ function displayStorageNotes() {
 }
 
 function readAndDisplayNote(id) {
+  console.log("Hallo");
   const selectedNoteEl = document.querySelector(`.note-card[data-id="${id}"]`);
   console.log(selectedNoteEl);
 
@@ -113,18 +112,20 @@ function newNoteButton() {
   deleteSelectedNoteClass();
 }
 
-function deleteNoteButton(id) {
-  // replaceNote = false;
+function deleteNoteButton() {
+  const selectedNoteToDeleteEl = document.querySelector(".selected-note");
 
-  const selectedNoteEl = document.querySelector(`.note-card[data-id="${id}"]`);
-  console.log(selectedNoteEl);
+  let deleteNoteId = Number(selectedNoteToDeleteEl.getAttribute("data-id"));
+
+  deleteNote(deleteNoteId);
 
   noteTitleEle.value = "";
   noteContentEle.value = "";
 
-  /* noteTitleEle.value = "";
-  noteContentEle.value = "";
-  deleteSelectedNoteClass(); */
+  displayStorageNotes();
+  applyEventListener();
+
+  replaceNote = false;
 }
 
 function deleteSelectedNoteClass() {
@@ -132,4 +133,13 @@ function deleteSelectedNoteClass() {
   noteCardEls.forEach((noteCard) => {
     noteCard.classList.remove("selected-note");
   });
+}
+
+function escapeHtml(unsafe) {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
