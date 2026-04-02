@@ -36,7 +36,6 @@ body {
 
 .nav-mobile-tablet {
   height: 10%;
-  /* box-shadow: 0px 0px 5px rgb(211, 211, 211); */
   display: flex;
   justify-content: space-evenly;
   gap: 1rem;
@@ -104,7 +103,6 @@ body {
   color: var(--font-color);
   width: calc(100% - 1rem);
   padding: 0.5rem;
-  /* box-shadow: 0px 0px 5px rgb(211, 211, 211); */
   border: 0.5px solid rgb(211, 211, 211);
   border-radius: var(--border-radius);
   outline: none;
@@ -121,7 +119,6 @@ body {
 }
 
 .file-upload {
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -137,13 +134,22 @@ body {
   justify-content: center;
   align-items: center;
   padding: 1.5rem;
-  border: 1px solid var(--font-color);
-  background: radial-gradient(
+  border: 0.5px solid rgb(211, 211, 211);
+  /* background: radial-gradient(
     rgb(230, 230, 230),
     rgb(243, 243, 243),
     rgb(255, 255, 255)
-  );
+  ); */
   border-radius: 50%;
+}
+
+.file-upload-icon-box:hover {
+  cursor: pointer;
+  background-color: rgba(211, 211, 211, 0.2);
+}
+
+#file-upload {
+  display: none;
 }
 
 .file-upload-icon {
@@ -161,7 +167,6 @@ body {
 .note-card {
   min-width: 50%;
   border: 0.5px solid rgb(211, 211, 211);
-  /* box-shadow: 0px 0px 5px rgb(211, 211, 211); */
   border-radius: var(--border-radius);
   transition: 0.2s all ease-in-out;
   padding: 2rem;
@@ -277,27 +282,26 @@ body {
     margin: 0.5rem;
   }
 
-  .main-content {
-    width: 80%;
-    margin-bottom: 0;
-    border-bottom: none;
-    display: flex;
-    gap: 2rem;
-  }
-
   .main-title-and-content {
     width: 60%;
+    height: 100%;
+  }
+
+  #note-content-input {
+    height: 100%;
   }
 
   .save-delete-and-upload {
     width: 40%;
     height: 100%;
+    margin-bottom: 0;
   }
 
   .save-and-delete {
     display: flex;
     justify-content: center;
     gap: 2rem;
+    height: 5.5rem;
     margin-bottom: 2rem;
   }
 
@@ -309,19 +313,16 @@ body {
   }
 
   .file-upload {
+    height: calc(100% - 7.5rem);
     flex-direction: column;
     justify-content: flex-start;
+    gap: 2rem;
     border: 0.5px solid rgb(211, 211, 211);
     border-radius: 5rem;
-    /* background-color: rgb(255, 255, 255); */
   }
 
   .file-upload-title {
-    margin: 4rem 0 2rem 0;
-  }
-
-  #note-content-input {
-    height: 100%;
+    margin-top: 5rem;
   }
 
   .storage-mobile {

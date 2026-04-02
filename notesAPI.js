@@ -50,9 +50,5 @@ function deleteNote(deleteNoteId) {
 
   const filteredNotes = notes.filter((note) => note.id !== deleteNoteId);
 
-  /* const deleteNoteIndex = notes.findIndex((note) => note.id === deleteNoteId);
-
-  notes.splice(deleteNoteIndex, 1); */
-
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(filteredNotes));
 }

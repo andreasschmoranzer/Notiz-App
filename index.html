@@ -63,17 +63,20 @@
               <img src="img/trash.svg" alt="Notiz löschen" class="btn-icon" />
             </button>
           </div>
-          <div class="file-upload">
+          <div id="drag-and-drop" class="file-upload">
             <p class="file-upload-title">
               Datei<br />
               hochladen!
             </p>
-            <div class="file-upload-icon-box">
-              <img
-                class="file-upload-icon"
-                src="img/newNote.svg"
-                alt="Upload file"
-              />
+            <div id="drop-zone">
+              <label for="file-upload" class="file-upload-icon-box">
+                <input type="file" id="file-upload" />
+                <img
+                  class="file-upload-icon"
+                  src="img/newNote.svg"
+                  alt="Upload file"
+                />
+              </label>
             </div>
           </div>
         </div>

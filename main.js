@@ -7,6 +7,10 @@ const createNoteButtonMobileEle = document.querySelector(".new-note");
 const createNoteButtonDesktopEle = document.querySelector(".create-note");
 const deleteButtonMobileEle = document.querySelector("#delete-note-mobile");
 const deleteButtonDesktopEle = document.querySelector("#delete-note-desktop");
+// File Upload
+const fileInputEle = document.querySelector("#file-upload");
+let dropZoneEle = document.querySelector("#drop-zone");
+const LOCAL_STORAGE_KEY_FILES = "noteapp-files";
 
 const noteTitleEle = document.getElementById("note-title-input");
 const noteContentEle = document.getElementById("note-content-input");
@@ -23,6 +27,8 @@ createNoteButtonDesktopEle.addEventListener("click", () => newNoteButton());
 
 deleteButtonMobileEle.addEventListener("click", () => deleteNoteButton());
 deleteButtonDesktopEle.addEventListener("click", () => deleteNoteButton());
+
+fileInputEle.addEventListener("click", () => uploadFile());
 
 displayStorageNotes();
 applyEventListener();
@@ -143,3 +149,53 @@ function escapeHtml(unsafe) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
+
+// File Upload
+
+function getFilesFromLocalStorage(key) {
+  let files = JSON.parse(localStorage.getItem(key)) || [];
+  return files;
+}
+
+function saveFilesToLocalStorage(key, file) {
+  console.log(JSON.stringify(file));
+  localStorage.setItem(key, JSON.stringify(file));
+}
+
+function displayFile() {}
+
+function uploadFile() {
+  let filesArray = getFilesFromLocalStorage(LOCAL_STORAGE_KEY_FILES);
+  console.log(filesArray);
+  // we'll understand this property just shortly!
+  var file = this.filesArray;
+  console.log(file);
+  /*   const fileObject = {
+    name: file.name,
+    type: file.type,
+    size: file.size,
+  };
+  files.push(fileObject);
+  saveFilesToLocalStorage(LOCAL_STORAGE_KEY_FILES, files); */
+}
+
+fileInput.onchange = function (e) {
+  // we'll understand this property just shortly!
+  var file = this.files;
+  console.log(file);
+};
+
+// drag and drop
+
+console.log(dropZoneEle);
+
+dropZoneEle.ondragover = function (e) {
+  e.preventDefault();
+};
+
+dropZoneEle.ondrop = function (e) {
+  e.preventDefault();
+
+  var files = e.dataTransfer.files;
+  console.log(files);
+};
