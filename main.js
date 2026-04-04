@@ -7,10 +7,12 @@ const createNoteButtonMobileEle = document.querySelector(".new-note");
 const createNoteButtonDesktopEle = document.querySelector(".create-note");
 const deleteButtonMobileEle = document.querySelector("#delete-note-mobile");
 const deleteButtonDesktopEle = document.querySelector("#delete-note-desktop");
+
 // File Upload
 const fileInputEle = document.querySelector("#file-upload");
+
+const fileStorageEle = document.querySelector(".file-storage");
 let dropZoneEle = document.querySelector("#drop-zone");
-const LOCAL_STORAGE_KEY_FILES = "noteapp-files";
 
 const noteTitleEle = document.getElementById("note-title-input");
 const noteContentEle = document.getElementById("note-content-input");
@@ -18,6 +20,7 @@ const noteCardButtonEle = document.querySelector(".note-card");
 
 let replaceNote = false;
 let noteId = null;
+let uploadedFiles = [];
 
 saveButtonMobileEle.addEventListener("click", () => saveButton());
 saveButtonDesktopEle.addEventListener("click", () => saveButton());
@@ -28,7 +31,7 @@ createNoteButtonDesktopEle.addEventListener("click", () => newNoteButton());
 deleteButtonMobileEle.addEventListener("click", () => deleteNoteButton());
 deleteButtonDesktopEle.addEventListener("click", () => deleteNoteButton());
 
-fileInputEle.addEventListener("click", () => uploadFile());
+fileInputEle.addEventListener("change", uploadFile);
 
 displayStorageNotes();
 applyEventListener();
@@ -87,6 +90,7 @@ function readAndDisplayNote(id) {
 function saveButton() {
   const title = noteTitleEle.value;
   const content = noteContentEle.value;
+  const files = uploadedFiles;
 
   console.log(replaceNote);
 
@@ -101,7 +105,7 @@ function saveButton() {
     return;
   }
 
-  saveNote(title, content, replaceNote);
+  saveNote(title, content, files, replaceNote);
   displayStorageNotes();
 
   noteTitleEle.value = "";
@@ -152,38 +156,39 @@ function escapeHtml(unsafe) {
 
 // File Upload
 
-function getFilesFromLocalStorage(key) {
-  let files = JSON.parse(localStorage.getItem(key)) || [];
-  return files;
+function displayFile() {
+  let html = "";
+
+  html = `<div class="file-item-box">
+            <img class="file-item" src="img/about-1.jpg" alt="" />
+            <p class="file-name">about-1.jpeg</p>
+          </div>`;
+
+  fileStorageEle.innerHTML = html;
 }
 
-function saveFilesToLocalStorage(key, file) {
-  console.log(JSON.stringify(file));
-  localStorage.setItem(key, JSON.stringify(file));
+function filesArray(fileList) {
+  let uploadedFiles = [];
+  for (let i = 0; i < fileList.length; i++) {
+    const fileObject = {
+      name: fileList[i].name,
+      type: fileList[i].type,
+      size: fileList[i].size,
+    };
+    uploadedFiles.push(fileObject);
+  }
+  console.log(uploadedFiles);
+  return uploadedFiles;
 }
-
-function displayFile() {}
 
 function uploadFile() {
-  let filesArray = getFilesFromLocalStorage(LOCAL_STORAGE_KEY_FILES);
-  console.log(filesArray);
-  // we'll understand this property just shortly!
-  var file = this.filesArray;
-  console.log(file);
-  /*   const fileObject = {
-    name: file.name,
-    type: file.type,
-    size: file.size,
-  };
-  files.push(fileObject);
-  saveFilesToLocalStorage(LOCAL_STORAGE_KEY_FILES, files); */
+  uploadedFiles = [];
+  let files = this.files;
+  console.log(files);
+  console.log(this.files.length);
+  uploadedFiles = filesArray(files);
+  console.log(uploadedFiles);
 }
-
-fileInput.onchange = function (e) {
-  // we'll understand this property just shortly!
-  var file = this.files;
-  console.log(file);
-};
 
 // drag and drop
 

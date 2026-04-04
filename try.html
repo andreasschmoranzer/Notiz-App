@@ -44,10 +44,7 @@
       console.log(array);
 
       function test() {
-        array.push(4);
-        console.log(array);
-        const x = localStorage.setItem("Hallo", array);
-        console.log(x);
+        array.forEach((item) => console.log(item));
       }
 
       test();
@@ -60,5 +57,6 @@
     </div>
     <label for="myFile" class="file-upload">Send File</label>
     <input type="file" id="myFile" />
+    <div id="test">hallo</div>
   </body>
 </html>

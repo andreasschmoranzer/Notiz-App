@@ -4,7 +4,7 @@ function getNotes() {
   return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
 }
 
-function saveNote(title, content, replaceNote) {
+function saveNote(title, content, files, replaceNote) {
   const notes = getNotes();
 
   if (replaceNote === true) {
@@ -13,6 +13,7 @@ function saveNote(title, content, replaceNote) {
       id: noteId,
       title,
       content,
+      files,
       lastUpdated: new Date().getTime(),
     };
   } else {
@@ -20,6 +21,7 @@ function saveNote(title, content, replaceNote) {
       id: getNextId(),
       title,
       content,
+      files,
       lastUpdated: new Date().getTime(),
     });
   }

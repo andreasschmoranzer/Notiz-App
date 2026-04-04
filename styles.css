@@ -114,6 +114,10 @@ body {
   color: var(--font-color);
 }
 
+.save-delete-and-upload {
+  padding: 0.5rem;
+}
+
 .save-and-delete {
   display: none;
 }
@@ -121,7 +125,8 @@ body {
 .file-upload {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .file-upload-title {
@@ -133,7 +138,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.5rem;
+  padding: 0.2rem;
   border: 0.5px solid rgb(211, 211, 211);
   /* background: radial-gradient(
     rgb(230, 230, 230),
@@ -153,7 +158,17 @@ body {
 }
 
 .file-upload-icon {
-  height: 4rem;
+  height: 3rem;
+}
+
+.file-item {
+  height: 10rem;
+  border-radius: 2rem;
+}
+
+.file-name {
+  font-size: 0.8rem;
+  text-align: center;
 }
 
 .storage-mobile {
